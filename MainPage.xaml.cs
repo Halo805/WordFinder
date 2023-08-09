@@ -314,9 +314,12 @@ namespace WordFinder
 
         private void btnSearh_Click(object sender, RoutedEventArgs e)
         {
+            ViewModel.Top10Words.Clear();
+
             IWordFinder finder = new WordFinder.Data.WordFinder(Matrix);
             //ViewModel.Top10Words =new ObservableCollection<string>(finder.Find(ViewModel.WordStream).Cast<string>());
             var toplstTemp = finder.Find(ViewModel.WordStream);
+            
             foreach (string str in toplstTemp)
             {
                 ViewModel.Top10Words.Add(str);
