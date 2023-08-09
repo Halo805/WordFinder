@@ -9,11 +9,13 @@ namespace WordFinder.Data
 {
     public class WordFinder : IWordFinder
     {
-        private IEnumerable<string> horizontalmatrix;
-        private IEnumerable<string> verticalmatrix;
+        private int Rows = 0;
+        private int Columns = 0;
+        private IEnumerable<string> Horizontalmatrix;
+        private IEnumerable<string> Verticalmatrix;
 
-        private IEnumerable<string> horizontalmatrixDummy;
-        private IEnumerable<string> verticalmatrixDummy;
+        private IEnumerable<string> HorizontalmatrixDummy;
+        private IEnumerable<string> VerticalmatrixDummy;
         public WordFinder(bool _useDummyData) 
         {
             if (_useDummyData)
@@ -23,29 +25,58 @@ namespace WordFinder.Data
         }
         public WordFinder(IEnumerable<string> matrix)
         {
-            horizontalmatrix = matrix;
-            
+            Horizontalmatrix = matrix;
+            SetRows();
+            SetColumns();
+            FillVerticalMatrix();
+        }
+
+        private void FillVerticalMatrix()
+        {
+            if (Rows > 0 && Columns > 0 && Horizontalmatrix != null && Horizontalmatrix.Count() > 0)
+            {
+                string[] verticalMatrixArray = new string[Columns];
+                
+
+                foreach (string word in Horizontalmatrix)
+                {
+                    int position = 0;
+                    foreach (char letter in word.ToCharArray())
+                    {
+                        verticalMatrixArray[position] = (verticalMatrixArray[position] != null ? verticalMatrixArray[position].ToString() + letter.ToString() : letter.ToString());
+                        position++;
+                    }                    
+                }
+
+                Verticalmatrix = (from a in verticalMatrixArray
+                                 select a.ToString().PadRight(Rows, 'X')).ToList<string>();
+            }
+        }
+
+        private void SetRows()
+        {
+            if (Horizontalmatrix != null && Horizontalmatrix.Count() > 0)
+            {
+                Rows = Horizontalmatrix.Count();
+            }
+        }
+
+        private void SetColumns()
+        {
+            if (Horizontalmatrix != null && Horizontalmatrix.Count() > 0)
+            {
+                Columns = Horizontalmatrix.FirstOrDefault().Length;
+            }
         }
 
         private void FillDummyData()
         {
-            horizontalmatrixDummy = new List<string>();
-            verticalmatrixDummy = new List<string>();
+            HorizontalmatrixDummy = new List<string>();
+            VerticalmatrixDummy = new List<string>();
 
-
-            horizontalmatrixDummy = new string[] { "abcdc", "fgwio", "chill", "pqnsd", "uvdxy" };
-            //horizontalmatrixDummy.Append("abcdc");
-            //horizontalmatrixDummy.Append("fgwio");
-            //horizontalmatrixDummy.Append("chill");
-            //horizontalmatrixDummy.Append("pqnsd");
-            //horizontalmatrixDummy.Append("uvdxy");
-
-            verticalmatrixDummy = new string[] { "afcpu" , "bghqv", "cwind", "dilsx","coldy" };
-            //verticalmatrixDummy.Append("afcpu");
-            //verticalmatrixDummy.Append("bghqv");
-            //verticalmatrixDummy.Append("cwind");
-            //verticalmatrixDummy.Append("dilsx");
-            //verticalmatrixDummy.Append("coldy");
+            HorizontalmatrixDummy = new string[] { "abcdc", "fgwio", "chill", "pqnsd", "uvdxy" };
+            
+            VerticalmatrixDummy = new string[] { "afcpu" , "bghqv", "cwind", "dilsx","coldy" };            
         }
 
         public IEnumerable<string> Find(IEnumerable<string> wordstream)
@@ -83,7 +114,8 @@ namespace WordFinder.Data
 
         private void FindWordInHorizontalmatrix(Dictionary<string, int> wordFrequency, string word)
         {
-            int count = horizontalmatrixDummy.Count(x => x.Contains(word));
+            //int count = HorizontalmatrixDummy.Count(x => x.Contains(word));
+            int count = Horizontalmatrix.Count(x => x.Contains(word));
             if (wordFrequency.ContainsKey(word))
             {
                 wordFrequency[word] = count + (int)wordFrequency[word];
@@ -96,7 +128,8 @@ namespace WordFinder.Data
 
         private void FindWordInVerticalmatrixmatrix(Dictionary<string, int> wordFrequency, string word)
         {
-            int count = verticalmatrixDummy.Count(x => x.Contains(word));
+            //int count = VerticalmatrixDummy.Count(x => x.Contains(word));
+            int count = Verticalmatrix.Count(x => x.Contains(word));
             if (wordFrequency.ContainsKey(word))
             {
                 wordFrequency[word] = count + (int)wordFrequency[word];

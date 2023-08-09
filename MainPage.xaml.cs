@@ -17,6 +17,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using WordFinder.Interfaces;
+using WordFinder.ViewModels;
 
 // The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
@@ -35,8 +36,9 @@ namespace WordFinder
         List<TextBlock> LblInMatrix;
 
         //Emulate the ViewModel
-        ObservableCollection<string> WordStream = new ObservableCollection<string>();
-        ObservableCollection<string> Top10Words = new ObservableCollection<string>();
+        //public ObservableCollection<string> Top10Words = new ObservableCollection<string>();
+        //public ObservableCollection<string> WordStream = new ObservableCollection<string>();
+        public AlphabetSoupViewModel ViewModel { get; set; }
 
         public MainPage()
         {
@@ -54,7 +56,10 @@ namespace WordFinder
 
             IEnumerable<string> foundWords = wf.Find(list);
             */
-            listWordsToFind.ItemsSource = WordStream;
+
+            //listTop10Words.ItemsSource = Top10Words;
+            //listWordsToFind.ItemsSource = WordStream;
+            ViewModel = new AlphabetSoupViewModel();
 
         }
 
@@ -291,9 +296,9 @@ namespace WordFinder
 
             if (!string.IsNullOrEmpty(word))
             {
-                if (!WordStream.Contains(word))
+                if (!ViewModel.WordStream.Contains(word))
                 {
-                    WordStream.Add(word);
+                    ViewModel.WordStream.Add(word);
                 }
 
                 btnSave.IsEnabled = false;
@@ -309,7 +314,13 @@ namespace WordFinder
 
         private void btnSearh_Click(object sender, RoutedEventArgs e)
         {
-            IWordFinder finder = new WordFinder.Data.WordFinder(WordStream);
+            IWordFinder finder = new WordFinder.Data.WordFinder(Matrix);
+            //ViewModel.Top10Words =new ObservableCollection<string>(finder.Find(ViewModel.WordStream).Cast<string>());
+            var toplstTemp = finder.Find(ViewModel.WordStream);
+            foreach (string str in toplstTemp)
+            {
+                ViewModel.Top10Words.Add(str);
+            }
         }
     }
 }

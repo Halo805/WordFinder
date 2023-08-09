@@ -30,13 +30,13 @@
     <AppXManifest Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\Core\AppxManifest.xml">
       <PackagePath>AppxManifest.xml</PackagePath>
       <ReRegisterAppIfChanged>true</ReRegisterAppIfChanged>
-      <Modified>2023-08-09T17:28:31.800</Modified>
+      <Modified>2023-08-09T21:37:28.198</Modified>
     </AppXManifest>
   </ItemGroup>
   <ItemGroup>
     <AppxPackagedFile Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\WordFinder.exe">
       <PackagePath>entrypoint\WordFinder.exe</PackagePath>
-      <Modified>2023-08-09T17:28:31.091</Modified>
+      <Modified>2023-08-09T21:37:27.793</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Microsoft SDKs\UWPNuGetPackages\runtime.win10-x86.microsoft.netcore.universalwindowsplatform\6.2.12\runtimes\win10-x86\lib\uap10.0.15138\System.Runtime.dll">
       <PackagePath>System.Runtime.dll</PackagePath>
@@ -94,15 +94,15 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\WordFinder.xr.xml">
       <PackagePath>WordFinder.xr.xml</PackagePath>
-      <Modified>2023-08-09T16:34:43.277</Modified>
+      <Modified>2023-08-09T21:06:18.041</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\App.xbf">
       <PackagePath>App.xbf</PackagePath>
-      <Modified>2023-08-09T17:28:30.991</Modified>
+      <Modified>2023-08-09T21:37:27.720</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\MainPage.xbf">
       <PackagePath>MainPage.xbf</PackagePath>
-      <Modified>2023-08-09T17:28:30.990</Modified>
+      <Modified>2023-08-09T21:37:27.720</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="C:\Program Files %28x86%29\Windows Kits\10\UnionMetadata\10.0.19041.0\Windows.winmd">
       <PackagePath>WinMetadata\Windows.winmd</PackagePath>
@@ -110,11 +110,11 @@
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\resources.pri">
       <PackagePath>resources.pri</PackagePath>
-      <Modified>2023-08-09T12:41:04.515</Modified>
+      <Modified>2023-08-09T20:45:43.358</Modified>
     </AppxPackagedFile>
     <AppxPackagedFile Include="D:\NGC\Git\TEST\WordFinder\bin\x86\Debug\Core\WordFinder.exe">
       <PackagePath>WordFinder.exe</PackagePath>
-      <Modified>2023-08-09T17:28:31.794</Modified>
+      <Modified>2023-08-09T21:37:28.190</Modified>
     </AppxPackagedFile>
   </ItemGroup>
   <ItemGroup>
