@@ -120,7 +120,7 @@
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
                                                         <StackPanel Orientation="Horizontal">
-                                                            <!--<AppBarButton Icon="SolidStar" Height="30" Width="20"/>-->
+                                                            <AppBarButton Icon="Home" Height="30" Width="20"/>
                                                             <TextBlock Text="{Binding Mode=TwoWay}" />
                                                             <!--<Button>
                                                                 <StackPanel>
@@ -133,8 +133,7 @@
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>
                                             </ListBox>
-                                        </Grid>
-                                        
+                                        </Grid>                                        
                                     </Border>
                                 </Grid>
                             </Grid>

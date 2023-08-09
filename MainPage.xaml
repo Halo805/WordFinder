@@ -119,22 +119,16 @@
                                             <ListBox Grid.Row="1" Margin="0" Name="listTop10Words" ItemsSource="{x:Bind ViewModel.Top10Words}">
                                                 <ListBox.ItemTemplate>
                                                     <DataTemplate>
-                                                        <StackPanel Orientation="Horizontal">
-                                                            <!--<AppBarButton Icon="SolidStar" Height="30" Width="20"/>-->
-                                                            <TextBlock Text="{Binding Mode=TwoWay}" />
-                                                            <!--<Button>
-                                                                <StackPanel>
-                                                                    <Image />
-                                                                    <TextBlock/>
-                                                                </StackPanel>
-                                                            </Button>-->
-                                                            
+                                                        <StackPanel Orientation="Horizontal">                                                            
+                                                            <AppBarButton Name="btnStop" ToolTipService.ToolTip="Highlight Word" Tag="{Binding}" VerticalAlignment="top" Height="30" >
+                                                                <FontIcon FontFamily="{StaticResource SymbolThemeFontFamily}" Glyph="&#xE713;" Foreground="Red"/>
+                                                            </AppBarButton>
+                                                            <TextBlock Text="{Binding Mode=TwoWay}" VerticalAlignment="Bottom"/>                                                            
                                                         </StackPanel>
                                                     </DataTemplate>
                                                 </ListBox.ItemTemplate>
                                             </ListBox>
-                                        </Grid>
-                                        
+                                        </Grid>                                        
                                     </Border>
                                 </Grid>
                             </Grid>
