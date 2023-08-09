@@ -1,1 +1,0 @@
-D:\NGC\Git\TEST\WordFinder\WordFinder.csproj;x86
