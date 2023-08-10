@@ -34,6 +34,9 @@ namespace WordFinder
         List<string> Matrix;        
         List<TextBox> TxtsToDraw;
         List<TextBlock> LblInMatrix;
+        List<Border> CellInMatrix;
+
+        IWordFinder finder;
 
         //Emulate the ViewModel
         //public ObservableCollection<string> Top10Words = new ObservableCollection<string>();
@@ -104,6 +107,7 @@ namespace WordFinder
             TxtsToDraw = new List<TextBox>();
             Matrix = new List<string>();
             LblInMatrix = new List<TextBlock>();
+            CellInMatrix = new List<Border>();
 
             ClearGridMatrix();
             
@@ -124,6 +128,7 @@ namespace WordFinder
                     grdMatrix.ColumnDefinitions.Add(c);
 
                     Border cell = new Border();
+                    cell.Name= string.Format("cell_{0}_{1}", i, j);
                     cell.BorderThickness = new Thickness(1);
                     cell.BorderBrush = new SolidColorBrush(Colors.Black);
                     cell.Width = 40;
@@ -148,6 +153,7 @@ namespace WordFinder
                     grdMatrix.Children.Add(cell);
 
                     LblInMatrix.Add(lbl);
+                    CellInMatrix.Add(cell);
                 }
 
                 //Add the txt to build the Matrix's Row
@@ -215,6 +221,7 @@ namespace WordFinder
             TxtsToDraw = new List<TextBox>();
             Matrix = new List<string>();
             LblInMatrix = new List<TextBlock>();
+            CellInMatrix = new List<Border>();
 
             //Disabe and enable controls
             btnReset.IsEnabled = false;
@@ -224,6 +231,10 @@ namespace WordFinder
             txtColumns.IsEnabled = true;
             btnAddWord.IsEnabled = false;
             txtWord.IsEnabled = false;
+
+            //Clear Lists
+            ViewModel.WordStream.Clear();
+            ViewModel.Top10Words.Clear();
         }
 
         private async void btnSave_Click(object sender, RoutedEventArgs e)
@@ -316,7 +327,7 @@ namespace WordFinder
         {
             ViewModel.Top10Words.Clear();
 
-            IWordFinder finder = new WordFinder.Data.WordFinder(Matrix);
+            finder = new WordFinder.Data.WordFinder(Matrix);
             //ViewModel.Top10Words =new ObservableCollection<string>(finder.Find(ViewModel.WordStream).Cast<string>());
             var toplstTemp = finder.Find(ViewModel.WordStream);
             
@@ -324,6 +335,33 @@ namespace WordFinder
             {
                 ViewModel.Top10Words.Add(str);
             }
+        }
+
+        
+        private void btnHighlightWord_Click(object sender, RoutedEventArgs e)
+        {
+            int x = 0;
+            int y = 0;
+            int start = 0;
+            int end = 0;
+            AppBarButton btn = (AppBarButton)sender;
+            StackPanel sp = (StackPanel)btn.Parent;
+            TextBlock tb = (TextBlock)sp.Children[1];
+            tb.TextDecorations = Windows.UI.Text.TextDecorations.Strikethrough;
+
+            finder.FindPositionInMatrix(btn.Tag.ToString(), ref x, ref y, ref start, ref end);
+
+            //TextBlock lbl = LblInMatrix.Where(x => x.Name.Equals(string.Format("lbl_{0}_{1}", id, position))).FirstOrDefault();
+            for (int i = start; i <= end; i++)
+            {
+                Border cell = CellInMatrix.Where(element => element.Name.Equals(string.Format("cell_{0}_{1}", (y==-1?x:i), (y == -1?i:y)))).FirstOrDefault();
+                if (cell != null)
+                {
+                    cell.BorderBrush= new SolidColorBrush(Colors.Red);
+                }                
+            }
+
+            //btn.IsEnabled = false;
         }
     }
 }
